@@ -1,0 +1,12 @@
+
+replicaCount: 1
+image:
+  repository: nguyenmanhdung/config-service
+  tag: 0.2.0
+  pullPolicy: IfNotPresent
+service:
+  type: NodePort
+  port: 8888
+  targetPort: 8888
+  nodePort: 30000
+namespace: ci-cd-helm

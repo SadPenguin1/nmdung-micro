@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cd-helm
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ci-cd-helm
+  source:
+    helm:
+      valueFiles:
+        - values.yaml
+      chart: https://github.com/SadPenguin1/ci-cd-helm-repo.git
+      version: 0.1.0
+  project: default
