@@ -1,4 +1,3 @@
-
 replicaCount: 1
 image:
   repository: nguyenmanhdung/config-service

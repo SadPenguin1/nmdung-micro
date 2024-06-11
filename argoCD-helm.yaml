@@ -2,14 +2,21 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cd-helm
+  namespace: argocd
 spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: ci-cd-helm
   source:
+    chart: config-service
+    repoURL: https://github.com/SadPenguin1/ci-cd-helm-repo
+    targetRevision: 0.1.0
     helm:
-      valueFiles:
-        - values.yaml
-      chart: https://github.com/SadPenguin1/ci-cd-helm-repo.git
-      version: 0.1.0
+      releaseName: configservice
   project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
+    syncOptions:
+      - CreateNamespace=true
