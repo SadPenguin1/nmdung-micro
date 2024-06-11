@@ -7,5 +7,5 @@ service:
   type: NodePort
   port: 8888
   targetPort: 8888
-  nodePort: 30020
+  nodePort: 30021
 namespace: ci-cd-helm
