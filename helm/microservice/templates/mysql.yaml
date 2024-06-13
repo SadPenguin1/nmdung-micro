@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mysql-statefulset
-  namespace: {{ .Release.Namespace }}
+  namespace: ci-cd-helm
 spec:
   serviceName: mysql
   replicas: 1
