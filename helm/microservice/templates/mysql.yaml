@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: mysql  
+  name: mysql-statefulset
   namespace: {{ .Release.Namespace }}
-  labels:
-    app: mysql
 spec:
-  replicas: {{ .Values.mysql.replicaCount }}  
+  serviceName: mysql
+  replicas: 1
   selector:
     matchLabels:
       app: mysql
@@ -17,8 +16,7 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }}  
-        imagePullPolicy: {{ .Values.mysql.image.pullPolicy }}  
+        image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }} 
         ports:
         - containerPort: {{ .Values.mysql.service.port }}  
         env:
@@ -30,67 +28,11 @@ spec:
         volumeMounts:
         - name: mysql-pvc
           mountPath: /var/lib/mysql
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mysql
-  namespace: {{ .Release.Namespace }}
-spec:
-  selector:
-    app: mysql
-  ports:
-    - protocol: TCP
-      port: {{ .Values.mysql.service.port }}  
-      targetPort: {{ .Values.mysql.service.targetPort }}  
-
----
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: myspl-pv
-  namespace: {{ .Release.Namespace }}
-spec:
-  capacity:
-    storage: 1Gi
-  volumeMode: Filesystem
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: low-latency-mysql
-  hostPath:
-    path: /tmp
-
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pvc
-  namespace: {{ .Release.Namespace }}
-spec:
-  storageClassName: low-latency-mysql
-  accessModes:
-    - ReadOnlyMany
-  resources:
-    requests:
-      storage: 1Gi
-  
----
-
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: low-latency-mysql
-  namespace: {{ .Release.Namespace }}
-provisioner: csi-driver.example-vendor.example
-reclaimPolicy: Retain
-allowVolumeExpansion: true
-mountOptions:
-  - discard
-volumeBindingMode: WaitForFirstConsumer
-parameters:
-  guaranteedReadWriteLatency: "true"
-
-
-
-
+  volumeClaimTemplates:
+  - metadata:
+      name: mysql-persistent-storage
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
