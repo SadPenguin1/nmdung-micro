@@ -20,7 +20,7 @@ spec:
         image: {{ .Values.monitorservice.image.repository }}:{{ .Values.monitorservice.image.tag }}  
         imagePullPolicy: {{ .Values.monitorservice.image.pullPolicy }}  
         ports:
-        - containerPort: {{ .Values,monitorservice.service.port }}  
+        - containerPort: {{ .Values.monitorservice.service.port }}  
 
 ---
 apiVersion: v1

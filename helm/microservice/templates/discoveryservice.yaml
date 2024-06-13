@@ -20,7 +20,7 @@ spec:
         image: {{ .Values.discoveryservice.image.repository }}:{{ .Values.discoveryservice.image.tag }}  
         imagePullPolicy: {{ .Values.discoveryservice.image.pullPolicy }}  
         ports:
-        - containerPort: {{ .Values,discoveryservice.service.port }}  
+        - containerPort: {{ .Values.discoveryservice.service.port }}  
 
 ---
 apiVersion: v1

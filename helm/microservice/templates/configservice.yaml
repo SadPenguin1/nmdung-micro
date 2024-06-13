@@ -20,7 +20,7 @@ spec:
         image: {{ .Values.configservice.image.repository }}:{{ .Values.configservice.image.tag }}  
         imagePullPolicy: {{ .Values.configservice.image.pullPolicy }}  
         ports:
-        - containerPort: {{ .Values,configservice.service.port }}  
+        - containerPort: {{ .Values.configservice.service.port }}  
 
 ---
 apiVersion: v1
