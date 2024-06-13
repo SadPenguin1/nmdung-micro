@@ -5,19 +5,13 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
     repoURL: https://github.com/SadPenguin1/ci-cd-helm-repo
     targetRevision: HEAD
-    path: helm
+    path: /helm
   destination:
-    server : https://kubernetes.default.svc
-    namespace : ci-cd-helm
+    server: https://kubernetes.default.svc
+    namespace: ci-cd-helm
   syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-
     automated:
-      selfHeal: true
       prune: true
-

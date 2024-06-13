@@ -1,0 +1,11 @@
+
+releases:
+- name: config-service
+  namespace: ci-cd-helm
+  chart: ./config-service
+- name: discovery-service
+  namespace: ci-cd-helm
+  chart: ./discovery-service
+- name: monitor-service
+  namespace: ci-cd-helm
+  chart: ./monitor-service
