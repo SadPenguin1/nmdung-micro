@@ -16,9 +16,9 @@ spec:
     spec:
       containers:
       - name: mysql
-        image: {{ .Values.mysql.image.repository }}:{{ .Values.mysql.image.tag }} 
+        image: mysql:latest
         ports:
-        - containerPort: {{ .Values.mysql.service.port }}  
+        - containerPort: 3306  
         env:
         - name: MYSQL_ROOT_PASSWORD
           valueFrom:
