@@ -21,7 +21,9 @@ spec:
         imagePullPolicy: {{ .Values.monitorservice.image.pullPolicy }}  
         ports:
         - containerPort: {{ .Values.monitorservice.service.port }}  
-
+        envFrom:
+        - configMapRef:
+            name: microservice-configmap
 ---
 apiVersion: v1
 kind: Service
