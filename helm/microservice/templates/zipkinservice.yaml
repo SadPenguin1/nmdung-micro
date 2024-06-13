@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin-service-deploy  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: zipkin-service-deploy
+spec:
+  replicas: {{ .Values.zipkinservice.replicaCount }}  
+  selector:
+    matchLabels:
+      app: zipkin-service-deploy
+  template:
+    metadata:
+      labels:
+        app: zipkin-service-deploy
+    spec:
+      containers:
+      - name: zipkin-service-container
+        image: {{ .Values.zipkinservice.image.repository }}:{{ .Values.zipkinservice.image.tag }}  
+        imagePullPolicy: {{ .Values.zipkinservice.image.pullPolicy }}  
+        ports:
+        - containerPort: {{ .Values.zipkinservice.service.port }}  
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zipkin-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.zipkinservice.service.type }}  
+  selector:
+    app: zipkin-service-deploy
+  ports:
+    - protocol: TCP
+      port: {{ .Values.zipkinservice.service.port }}  
+      targetPort: {{ .Values.zipkinservice.service.targetPort }}  
+      nodePort: {{ .Values.zipkinservice.service.nodePort }}  
+

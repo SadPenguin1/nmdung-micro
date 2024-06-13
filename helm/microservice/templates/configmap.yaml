@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: microservice-configmap
+data:
+  CONFIG_SERVICE: config-service-service: {{ .Values.configservice.service.port }}  
+  DISCOVERY_SERVICE: discovery-service-service: {{ .Values.discoveryservice.service.port }}  
+  ZIPKIN-SERVICE: zipkin-service-service: {{ .Values.zipkinservice.service.port }}  

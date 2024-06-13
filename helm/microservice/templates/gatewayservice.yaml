@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-service-deploy  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: gateway-service-deploy
+spec:
+  replicas: {{ .Values.gatewayservice.replicaCount }}  
+  selector:
+    matchLabels:
+      app: gateway-service-deploy
+  template:
+    metadata:
+      labels:
+        app: gateway-service-deploy
+    spec:
+      containers:
+      - name: gateway-service-container
+        image: {{ .Values.gatewayservice.image.repository }}:{{ .Values.gatewayservice.image.tag }}  
+        imagePullPolicy: {{ .Values.gatewayservice.image.pullPolicy }}  
+        ports:
+        - containerPort: {{ .Values.gatewayservice.service.port }}  
+        envFrom:
+        - configMapRef:
+            name: microservice-configmap 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.gatewayservice.service.type }}  
+  selector:
+    app: gateway-service-deploy
+  ports:
+    - protocol: TCP
+      port: {{ .Values.gatewayservice.service.port }}  
+      targetPort: {{ .Values.gatewayservice.service.targetPort }}  
+      nodePort: {{ .Values.gatewayservice.service.nodePort }}  
+
