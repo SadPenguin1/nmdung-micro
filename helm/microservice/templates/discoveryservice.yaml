@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: discovery-service-deploy  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: discovery-service-deploy
+spec:
+  replicas: {{ .Values.discoveryservice.replicaCount }}  
+  selector:
+    matchLabels:
+      app: discovery-service-deploy
+  template:
+    metadata:
+      labels:
+        app: discovery-service-deploy
+    spec:
+      containers:
+      - name: discovery-service-container
+        image: {{ .Values.discoveryservice.image.repository }}:{{ .Values.discoveryservice.image.tag }}  
+        imagePullPolicy: {{ .Values.discoveryservice.image.pullPolicy }}  
+        ports:
+        - containerPort: {{ .Values,discoveryservice.service.port }}  
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: discovery-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.discoveryservice.service.type }}  
+  selector:
+    app: discovery-service-deploy
+  ports:
+    - protocol: TCP
+      port: {{ .Values.discoveryservice.service.port }}  
+      targetPort: {{ .Values.discoveryservice.service.targetPort }}  
+      nodePort: {{ .Values.discoveryservice.service.nodePort }}  
+

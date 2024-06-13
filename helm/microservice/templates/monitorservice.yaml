@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: monitor-service-deploy  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: monitor-service-deploy
+spec:
+  replicas: {{ .Values.monitorservice.replicaCount }}  
+  selector:
+    matchLabels:
+      app: monitor-service-deploy
+  template:
+    metadata:
+      labels:
+        app: monitor-service-deploy
+    spec:
+      containers:
+      - name: monitor-service-container
+        image: {{ .Values.monitorservice.image.repository }}:{{ .Values.monitorservice.image.tag }}  
+        imagePullPolicy: {{ .Values.monitorservice.image.pullPolicy }}  
+        ports:
+        - containerPort: {{ .Values,monitorservice.service.port }}  
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: monitor-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.monitorservice.service.type }}  
+  selector:
+    app: monitor-service-deploy
+  ports:
+    - protocol: TCP
+      port: {{ .Values.monitorservice.service.port }}  
+      targetPort: {{ .Values.monitorservice.service.targetPort }}  
+      nodePort: {{ .Values.monitorservice.service.nodePort }}  
+

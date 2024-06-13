@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cd-helm-multiple-services
+  name: cd-helm
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/SadPenguin1/ci-cd-helm-repo
     targetRevision: HEAD
-    path: helm/helmfile.yaml
+    path: helm/microservice
   destination:
     server: https://kubernetes.default.svc
     namespace: ci-cd-helm

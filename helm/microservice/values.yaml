@@ -1,0 +1,38 @@
+configservice:
+  replicaCount: 1
+  image:
+    repository: nguyenmanhdung/config-service
+    tag: 0.2.0
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 8888
+    targetPort: 8888
+    nodePort: 30021
+  namespace: ci-cd-helm
+
+
+discoveryservice:
+  replicaCount: 1
+  image:
+    repository: nguyenmanhdung/discovery-service
+    tag: 0.1.0
+    pullPolicy: IfNotPresent
+  service:
+    port: 8761
+    targetPort: 8761
+    namespace: ci-cd-helm
+    
+
+monitorservice:
+  replicaCount: 1
+  image:
+    repository: nguyenmanhdung/monitor-service
+    tag: 0.1.0
+    pullPolicy: IfNotPresent
+  service:
+    port: 8086
+    targetPort: 8086
+    namespace: ci-cd-helm
+
+

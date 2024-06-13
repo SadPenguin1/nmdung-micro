@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-service-deploy  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: config-service-deploy
+spec:
+  replicas: {{ .Values.configservice.replicaCount }}  
+  selector:
+    matchLabels:
+      app: config-service-deploy
+  template:
+    metadata:
+      labels:
+        app: config-service-deploy
+    spec:
+      containers:
+      - name: config-service-container
+        image: {{ .Values.configservice.image.repository }}:{{ .Values.configservice.image.tag }}  
+        imagePullPolicy: {{ .Values.configservice.image.pullPolicy }}  
+        ports:
+        - containerPort: {{ .Values,configservice.service.port }}  
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: config-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.configservice.service.type }}  
+  selector:
+    app: config-service-deploy
+  ports:
+    - protocol: TCP
+      port: {{ .Values.configservice.service.port }}  
+      targetPort: {{ .Values.configservice.service.targetPort }}  
+      nodePort: {{ .Values.configservice.service.nodePort }}  
+
