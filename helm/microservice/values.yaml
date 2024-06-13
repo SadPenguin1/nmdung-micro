@@ -22,12 +22,12 @@ discoveryservice:
     port: 8761
     targetPort: 8761
     namespace: ci-cd-helm
-    
+
 
 monitorservice:
   replicaCount: 1
   image:
-    repository: nguyenmanhdung/monitor-service
+    repository: nguyenmanhdung/monitor-admin
     tag: 0.1.0
     pullPolicy: IfNotPresent
   service:
