@@ -3,7 +3,7 @@ kind: StorageClass
 metadata:
   name: sc-ci-cd
   namespace: ci-cd-helm  
-provisioner: csi-driver.example-vendor.example
+provisioner: rancher.io/local-path
 reclaimPolicy: Retain
 allowVolumeExpansion: true
 mountOptions:
@@ -11,12 +11,13 @@ mountOptions:
 volumeBindingMode: WaitForFirstConsumer
 parameters:
   guaranteedReadWriteLatency: "true"
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: mysql
-  namespace: your-namespace
+  namespace: ci-cd-helm
 spec:
   selector:
     app: mysql
