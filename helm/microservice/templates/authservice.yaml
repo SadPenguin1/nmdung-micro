@@ -24,6 +24,7 @@ spec:
         envFrom:
         - configMapRef:
             name: microservice-configmap 
+        env:
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
