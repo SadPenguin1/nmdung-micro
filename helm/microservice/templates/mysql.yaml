@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
- name: sc-local
+ name: sc-ci-cd
 provisioner: k8s.io/minikube-hostpath
 parameters:
  {}
@@ -10,71 +10,73 @@ volumeBindingMode: Immediate
 allowVolumeExpansion: false
  
 ---
- 
-apiVersion: v1
-kind: Secret
-metadata:
- name: mysqlpwd
-data:
- password: b2N0b2JlcmZlc3Q=
- 
----
- 
 apiVersion: v1
 kind: Service
 metadata:
- name: todo-mysql
- labels:
-   app: todo-mysql
+  name: mysql
+  namespace: your-namespace
 spec:
- type: ClusterIP
- selector:
-   app: todo-mysql
- ports:
-   - port: 3306
-     protocol: TCP
- clusterIP: "None"
+  selector:
+    app: mysql
+  ports:
+    - protocol: TCP
+      port: 3306
+      targetPort: 3306
  
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
- name: todo-mysql
+ name: mysql
 spec:
  selector:
    matchLabels:
-     app: todo-mysql
- serviceName: todo-mysql
+     app: mysql
+ serviceName: mysql
  replicas: 1
  template:
    metadata:
      labels:
-       app: todo-mysql
+       app: mysql
    spec:
      terminationGracePeriodSeconds: 10
      containers:
-     - name: todo-mysql
-       image: mysql:8
+     - name: mysql
+       image: mysql:latest
        ports:
        - containerPort: 3306
-         name: todo-mysql
+         name: mysql
        env:
        - name: MYSQL_ROOT_PASSWORD
          valueFrom:
            secretKeyRef:
-             name: mysqlpwd
-             key: password
-       - name: MYSQL_DATABASE
-         value: "todo_db"
+             name: mysql-secret
+             key: MYSQL_ROOT_PASSWORD
        volumeMounts:
        - mountPath: /var/lib/mysql
-         name: todo-volume
+         name: mysql-pvc
  volumeClaimTemplates:
  - metadata:
-     name: todo-volume
+     name: mysql-pvc
    spec:
-     storageClassName: sc-local
+     storageClassName: sc-ci-cd
      accessModes: [ "ReadWriteOnce" ]
      resources:
        requests:
-         storage: 1Gi
+         storage: 2Gi
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: hostpath
+  capacity:
+    storage: 2Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data"
