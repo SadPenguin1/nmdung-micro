@@ -109,7 +109,7 @@ notificationservice:
 statisticservice:
   replicaCount: 1
   image:
-    repository: nguyenmanhdung/statistic-service
+    repository: nguyenmanhdung/statistic1-service
     tag: 0.1.0
     pullPolicy: IfNotPresent
   service:
