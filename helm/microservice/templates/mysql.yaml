@@ -54,7 +54,7 @@ spec:
              key: MYSQL_ROOT_PASSWORD
        volumeMounts:
        - mountPath: /var/lib/mysql
-         name: mysql-pvc
+         name: mysql-pv-volume
  volumeClaimTemplates:
  - metadata:
      name: mysql-pvc
