@@ -4,7 +4,7 @@ metadata:
   name: sc-ci-cd
   namespace: ci-cd-helm  
 provisioner: rancher.io/local-path
-reclaimPolicy: Retain
+reclaimPolicy: Delete
 allowVolumeExpansion: true
 mountOptions:
   - discard
@@ -76,7 +76,7 @@ metadata:
   labels:
     type: local
 spec:
-  storageClassName: hostpath
+  storageClassName: sc-ci-cd
   capacity:
     storage: 2Gi
   accessModes:
