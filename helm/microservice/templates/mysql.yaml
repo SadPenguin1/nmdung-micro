@@ -55,18 +55,19 @@ spec:
            secretKeyRef:
              name: mysql-secret
              key: MYSQL_ROOT_PASSWORD
-       volumeMounts:
+       volumeClaimTemplates: 
+       - metadata:
+           name: mysql-pvc
+         spec:
+           storageClassName: sc-ci-cd
+           accessModes: [ "ReadWriteOnce" ]
+           resources:
+             requests:
+               storage: 2Gi
+       volumeMounts:  
        - mountPath: /var/lib/mysql
          name: mysql-pv-volume
- volumeClaimTemplates:
- - metadata:
-     name: mysql-pvc
-   spec:
-     storageClassName: sc-ci-cd
-     accessModes: [ "ReadWriteOnce" ]
-     resources:
-       requests:
-         storage: 2Gi
+
 
 ---
 apiVersion: v1
