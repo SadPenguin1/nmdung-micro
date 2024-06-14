@@ -6,11 +6,7 @@ metadata:
 provisioner: rancher.io/local-path
 reclaimPolicy: Retain
 allowVolumeExpansion: true
-mountOptions:
-  - discard
 volumeBindingMode: WaitForFirstConsumer
-parameters:
-  guaranteedReadWriteLatency: "true"
 
 ---
 apiVersion: v1
@@ -42,7 +38,6 @@ spec:
      labels:
        app: mysql
    spec:
-     terminationGracePeriodSeconds: 10
      containers:
      - name: mysql
        image: mysql:latest
@@ -54,20 +49,19 @@ spec:
          valueFrom:
            secretKeyRef:
              name: mysql-secret
-             key: MYSQL_ROOT_PASSWORD
-       volumeClaimTemplates: 
-       - metadata:
-           name: mysql-pvc
-         spec:
-           storageClassName: sc-ci-cd
-           accessModes: [ "ReadWriteOnce" ]
-           resources:
-             requests:
-               storage: 2Gi
+             key: MYSQL_ROOT_PASSWORD   
        volumeMounts:  
        - mountPath: /var/lib/mysql
-         name: mysql-pv-volume
-
+         name: mysql-pvc
+  volumeClaimTemplates: 
+      - metadata:
+         name: mysql-pvc
+       spec:
+         storageClassName: sc-ci-cd
+          accessModes: [ "ReadWriteOnce" ]
+          resources:
+            requests:
+            storage: 2Gi 
 
 ---
 apiVersion: v1
