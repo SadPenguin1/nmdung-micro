@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service-deploy  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: notification-service-deploy
+spec:
+  replicas: {{ .Values.notificationservice.replicaCount }}  
+  selector:
+    matchLabels:
+      app: notification-service-deploy
+  template:
+    metadata:
+      labels:
+        app: notification-service-deploy
+    spec:
+      containers:
+      - name: notification-service-container
+        image: {{ .Values.notificationservice.image.repository }}:{{ .Values.notificationservice.image.tag }}  
+        imagePullPolicy: {{ .Values.notificationservice.image.pullPolicy }}  
+        ports:
+        - containerPort: {{ .Values.notificationservice.service.port }}  
+        envFrom:
+        - configMapRef:
+            name: microservice-configmap 
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.notificationservice.service.type }}  
+  selector:
+    app: notification-service-deploy
+  ports:
+    - protocol: TCP
+      port: {{ .Values.notificationservice.service.port }}  
+      targetPort: {{ .Values.notificationservice.service.targetPort }}  
+      nodePort: {{ .Values.notificationservice.service.nodePort }}  
+

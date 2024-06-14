@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: statistic-service-deploy  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: statistic-service-deploy
+spec:
+  replicas: {{ .Values.statisticservice.replicaCount }}  
+  selector:
+    matchLabels:
+      app: statistic-service-deploy
+  template:
+    metadata:
+      labels:
+        app: statistic-service-deploy
+    spec:
+      containers:
+      - name: statistic-service-container
+        image: {{ .Values.statisticservice.image.repository }}:{{ .Values.statisticservice.image.tag }}  
+        imagePullPolicy: {{ .Values.statisticservice.image.pullPolicy }}  
+        ports:
+        - containerPort: {{ .Values.statisticservice.service.port }}  
+        envFrom:
+        - configMapRef:
+            name: microservice-configmap 
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: statistic-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.statisticservice.service.type }}  
+  selector:
+    app: statistic-service-deploy
+  ports:
+    - protocol: TCP
+      port: {{ .Values.statisticservice.service.port }}  
+      targetPort: {{ .Values.statisticservice.service.targetPort }}  
+      nodePort: {{ .Values.statisticservice.service.nodePort }}  
+
