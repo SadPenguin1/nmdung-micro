@@ -4,7 +4,7 @@ metadata:
   name: sc-ci-cd
   namespace: ci-cd-helm  
 provisioner: rancher.io/local-path
-reclaimPolicy: Delete
+reclaimPolicy: Retain
 allowVolumeExpansion: true
 mountOptions:
   - discard
