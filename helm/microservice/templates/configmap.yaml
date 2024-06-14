@@ -7,7 +7,8 @@ data:
   DISCOVERY_SERVICE: "discovery-service-service:{{ .Values.discoveryservice.service.port }}"
   ZIPKIN-SERVICE: "zipkin-service-service:{{ .Values.zipkinservice.service.port }}"
   DB_USERNAME: "root"
-  DB_NAME: user_db
+  DB_NAME: "user_db"
+  DB_HOST : "mysql:3306"
 
 
 ---
