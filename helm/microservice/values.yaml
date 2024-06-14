@@ -71,5 +71,18 @@ mysql:
     namespace: ci-cd-helm
 
 
+authservice:
+  replicaCount: 1
+  image:
+    repository: nguyenmanhdung/auth-service
+    tag: 0.1.0
+    pullPolicy: IfNotPresent
+  service:
+    port: 8082
+    targetPort: 8082
+    namespace: ci-cd-helm
+
+
+
 
 
