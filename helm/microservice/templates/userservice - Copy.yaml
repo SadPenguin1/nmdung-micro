@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user-service-deploy  
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: user-service-deploy
+spec:
+  replicas: {{ .Values.userservice.replicaCount }}  
+  selector:
+    matchLabels:
+      app: user-service-deploy
+  template:
+    metadata:
+      labels:
+        app: user-service-deploy
+    spec:
+      containers:
+      - name: user-service-container
+        image: {{ .Values.userservice.image.repository }}:{{ .Values.userservice.image.tag }}  
+        imagePullPolicy: {{ .Values.userservice.image.pullPolicy }}  
+        ports:
+        - containerPort: {{ .Values.userservice.service.port }}  
+        envFrom:
+        - configMapRef:
+            name: microservice-configmap 
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD 
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: user-service-service
+  namespace: {{ .Release.Namespace }}
+spec:
+  type: {{ .Values.userservice.service.type }}  
+  selector:
+    app: user-service-deploy
+  ports:
+    - protocol: TCP
+      port: {{ .Values.userservice.service.port }}  
+      targetPort: {{ .Values.userservice.service.targetPort }}  
+      nodePort: {{ .Values.userservice.service.nodePort }}  
+

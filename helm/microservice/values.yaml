@@ -82,6 +82,17 @@ authservice:
     targetPort: 8082
     namespace: ci-cd-helm
 
+userservice:
+  replicaCount: 1
+  image:
+    repository: nguyenmanhdung/user-service
+    tag: 0.1.0
+    pullPolicy: IfNotPresent
+  service:
+    port: 8087
+    targetPort: 8087
+    namespace: ci-cd-helm
+
 
 
 
