@@ -26,42 +26,42 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
- name: mysql
+  name: mysql
 spec:
- selector:
-   matchLabels:
-     app: mysql
- serviceName: mysql
- replicas: 1
- template:
-   metadata:
-     labels:
-       app: mysql
-   spec:
-     containers:
-     - name: mysql
-       image: mysql:latest
-       ports:
-       - containerPort: 3306
-         name: mysql
-       env:
-       - name: MYSQL_ROOT_PASSWORD
-         valueFrom:
-           secretKeyRef:
-             name: mysql-secret
-             key: MYSQL_ROOT_PASSWORD   
-       volumeMounts:  
-       - mountPath: /var/lib/mysql
-         name: mysql-pvc
-  volumeClaimTemplates: 
-      - metadata:
-         name: mysql-pvc
-       spec:
-         storageClassName: sc-ci-cd
-          accessModes: [ "ReadWriteOnce" ]
-          resources:
-            requests:
-            storage: 2Gi 
+  selector:
+    matchLabels:
+      app: mysql
+  serviceName: mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+              name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: MYSQL_ROOT_PASSWORD   
+          volumeMounts:  
+            - mountPath: /var/lib/mysql
+              name: mysql-pvc
+      volumeClaimTemplates: 
+        - metadata:
+            name: mysql-pvc
+          spec:
+            storageClassName: sc-ci-cd
+            accessModes: [ "ReadWriteOnce" ]
+            resources:
+              requests:
+                storage: 2Gi 
 
 ---
 apiVersion: v1
