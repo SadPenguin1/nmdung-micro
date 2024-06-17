@@ -16,7 +16,7 @@ spec:
         app: monitor-service-deploy
     spec:
       containers:
-      - name: monitor-service-container
+      - name: monitor1-service-container
         image: {{ .Values.monitorservice.image.repository }}:{{ .Values.monitorservice.image.tag }}  
         imagePullPolicy: {{ .Values.monitorservice.image.pullPolicy }}  
         ports:
