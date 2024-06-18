@@ -8,13 +8,6 @@ spec:
     - host: microservice-helm
       http:
         paths:
-          - path: /config-service
-            pathType: Prefix
-            backend:
-              service:
-                name: config-service-service
-                port:
-                  number: 8888
           - path: /discovery-service
             pathType: Prefix
             backend:
@@ -22,6 +15,14 @@ spec:
                 name: discovery-service-service
                 port:
                   number: 8761
+          - path: /config-service
+            pathType: Prefix
+            backend:
+              service:
+                name: config-service-service
+                port:
+                  number: 8888
+
   tls:
     - hosts:
         - microservice-helm
