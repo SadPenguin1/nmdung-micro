@@ -18,10 +18,10 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: /discovery-service-service
+                name: discovery-service-service
                 port:
                   number: 8761
   tls:
     - hosts:
         - microservice-helm
-   
+      secretName: example-tls-secret
