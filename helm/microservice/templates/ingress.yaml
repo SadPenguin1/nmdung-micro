@@ -12,14 +12,14 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: config-service
+                name: config-service-service
                 port:
                   number: 8888
           - path: /discovery-service
             pathType: Prefix
             backend:
               service:
-                name: discovery-service  
+                name: discovery-service-service
                 port:
                   number: 8761
   tls:
