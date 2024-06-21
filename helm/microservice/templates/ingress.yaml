@@ -23,5 +23,19 @@ spec:
                 name: config-service-service
                 port:
                   number: 8888
+          - path: /user-service
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service-service
+                port:
+                  number: 8087
+          - path: /monitor-service
+            pathType: Prefix
+            backend:
+              service:
+                name: monitor-service-service
+                port:
+                  number: 8086
 
 
