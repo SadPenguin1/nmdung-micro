@@ -151,6 +151,28 @@ spec:
                 name: statistic-service-service
                 port:
                   number: 8088
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-gateway-helm
+  namespace: nmdung-helm
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: nmdung-gateway.devops.vn
+      http:
+        paths:
+          - path: /        
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway-service-service
+                port:
+                  number: 8085
+
 
 
 
