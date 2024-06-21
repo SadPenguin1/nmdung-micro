@@ -1,9 +1,10 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-ci-cd-helm
+  name: ingress-config-helm
   namespace: nmdung-helm
   annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
@@ -17,6 +18,21 @@ spec:
                 name: config-service-service
                 port:
                   number: 8888
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-monitor-helm
+  namespace: nmdung-helm
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: nmdung-helm.devops.vn
+      http:
+        paths:
           - path: /monitor
             pathType: Prefix
             backend:
@@ -24,6 +40,20 @@ spec:
                 name: monitor-service-service
                 port:
                   number: 8086
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-discovery-helm
+  namespace: nmdung-helm
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: nmdung-helm.devops.vn
+      http:
+        paths:
           - path: /discovery
             pathType: Prefix
             backend:
@@ -31,6 +61,20 @@ spec:
                 name: discovery-service-service
                 port:
                   number: 8761
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-user-helm
+  namespace: nmdung-helm
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: nmdung-helm.devops.vn
+      http:
+        paths:
           - path: /        
             pathType: Prefix
             backend:
