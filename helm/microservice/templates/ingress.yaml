@@ -67,14 +67,14 @@ metadata:
   name: ingress-user-helm
   namespace: nmdung-helm
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/rewrite-target: /swagger-ui/index.html
 spec:
   ingressClassName: nginx
   rules:
     - host: nmdung-helm.devops.vn
       http:
         paths:
-          - path: /        
+          - path: /user        
             pathType: Prefix
             backend:
               service:
