@@ -30,8 +30,6 @@ spec:
                 name: discovery-service-service
                 port:
                   number: 8761
-            rewrite:
-              target: /
           - path: /user            
             pathType: Prefix
             backend:
@@ -39,6 +37,3 @@ spec:
                 name: user-service-service
                 port:
                   number: 8087
-            rewrite:
-              target: /
-        
