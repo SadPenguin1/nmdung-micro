@@ -23,6 +23,13 @@ spec:
                 name: monitor-service-service
                 port:
                   number: 8086
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: discovery-service-service
+                port:
+                  number: 8761
           - path: /            
             pathType: Prefix
             backend:
@@ -31,10 +38,4 @@ spec:
                 port:
                   number: 8087
     
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: discovery-service-service
-                port:
-                  number: 8761
+        
