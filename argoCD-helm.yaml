@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cd-helm
+  name: mmdung-helm
   namespace: argocd
 spec:
   project: default
@@ -11,7 +11,7 @@ spec:
     path: helm/microservice
   destination:
     server: https://kubernetes.default.svc
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
   syncPolicy:
     automated:
       prune: true

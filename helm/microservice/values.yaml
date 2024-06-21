@@ -5,11 +5,10 @@ configservice:
     tag: 0.2.0
     pullPolicy: IfNotPresent
   service:
-    type: NodePort
+    type: ClusterIP
     port: 8888
     targetPort: 8888
-    nodePort: 30021
-  namespace: ci-cd-helm
+  namespace: nmdung-helm
 
 
 discoveryservice:
@@ -21,7 +20,7 @@ discoveryservice:
   service:
     port: 8761
     targetPort: 8761
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 
 monitorservice:
@@ -33,7 +32,7 @@ monitorservice:
   service:
     port: 8086
     targetPort: 8086
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 gatewayservice:
   replicaCount: 1
@@ -44,7 +43,7 @@ gatewayservice:
   service:
     port: 8085
     targetPort: 8085
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 
 zipkinservice:
@@ -56,7 +55,7 @@ zipkinservice:
   service:
     port: 9411
     targetPort: 9411
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 
 mysql:
@@ -68,7 +67,7 @@ mysql:
   service:
     port: 3306
     targetPort: 3306
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 
 authservice:
@@ -80,7 +79,7 @@ authservice:
   service:
     port: 8082
     targetPort: 8082
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 userservice:
   replicaCount: 1
@@ -91,7 +90,7 @@ userservice:
   service:
     port: 8087
     targetPort: 8087
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 
 notificationservice:
@@ -103,7 +102,7 @@ notificationservice:
   service:
     port: 8084
     targetPort: 8084
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 
 statisticservice:
@@ -115,7 +114,7 @@ statisticservice:
   service:
     port: 8088
     targetPort: 8088
-    namespace: ci-cd-helm
+    namespace: nmdung-helm
 
 
 
