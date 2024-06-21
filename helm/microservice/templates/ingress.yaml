@@ -4,7 +4,6 @@ metadata:
   name: ingress-ci-cd-helm
   namespace: nmdung-helm
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
