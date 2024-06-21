@@ -32,7 +32,7 @@ spec:
                 name: discovery-service-service
                 port:
                   number: 8761
-          - path: /user         
+          - path: /        
             pathType: Prefix
             backend:
               service:
