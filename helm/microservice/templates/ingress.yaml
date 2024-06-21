@@ -23,13 +23,15 @@ spec:
                 name: monitor-service-service
                 port:
                   number: 8086
-          - path: /
-            pathType: Prefix
+          - path: /user
+            pathType: Exact
             backend:
               service:
                 name: user-service-service
                 port:
                   number: 8087
+            rewrite:
+              target: /swagger-ui/index.html
           - path: /
             pathType: Prefix
             backend:
