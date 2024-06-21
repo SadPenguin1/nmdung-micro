@@ -32,7 +32,7 @@ spec:
                 name: discovery-service-service
                 port:
                   number: 8761
-          - path: /user            
+          - path: /swagger-ui/index.html         
             pathType: Prefix
             backend:
               service:
