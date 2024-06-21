@@ -23,7 +23,7 @@ spec:
                 name: monitor-service-service
                 port:
                   number: 8086
-          - path: /
+          - path: /discovery
             pathType: Prefix
             backend:
               service:
@@ -32,7 +32,7 @@ spec:
                   number: 8761
             rewrite:
               target: /
-          - path: /            
+          - path: /user            
             pathType: Prefix
             backend:
               service:
