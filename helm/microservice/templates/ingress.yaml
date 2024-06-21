@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-helm.devops.vn
+    - host: nmdung-config.devops.vn
       http:
         paths:
           - path: /config
