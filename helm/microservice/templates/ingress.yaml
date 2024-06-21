@@ -2,7 +2,8 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-ci-cd-helm
-  namespace: nmdung-helm
+  namespace: nmdung-helm\ annotations:
+  nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
@@ -30,8 +31,6 @@ spec:
                 name: discovery-service-service
                 port:
                   number: 8761
-            rewrite:
-              target: /
           - path: /user            
             pathType: Prefix
             backend:
@@ -39,7 +38,6 @@ spec:
                 name: user-service-service
                 port:
                   number: 8087
-            rewrite:
-              target: /
+    
 
 
