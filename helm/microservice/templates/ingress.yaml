@@ -36,7 +36,7 @@ spec:
     - host: nmdung-helm.devops.vn
       http:
         paths:
-          - path: /discovery
+          - path: /
             pathType: Prefix
             backend:
               service:
