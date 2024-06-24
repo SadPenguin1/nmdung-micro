@@ -24,7 +24,7 @@ spec:
                 name: zipkin-service-service
                 port:
                   number: 9411
-          - path: /monitor
+          - path: /
             pathType: ImplementationSpecific 
             backend:
               service:
