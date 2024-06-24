@@ -25,7 +25,7 @@ spec:
                 port:
                   number: 9411
           - path: /monitor
-            pathType: Prefix
+            pathType: ImplementationSpecific 
             backend:
               service:
                 name: monitor-service-service
