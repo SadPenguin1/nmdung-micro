@@ -23,7 +23,7 @@ spec:
               service:
                 name: zipkin-service-service
                 port:
-                  number: 9411
+                  number: 941111
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
