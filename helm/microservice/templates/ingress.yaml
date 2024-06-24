@@ -31,6 +31,27 @@ spec:
                 name: monitor-service-service
                 port:
                   number: 8086
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-monitor1-helm
+  namespace: nmdung-helm
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: nmdung-helm.devops.vn
+      http:
+        paths:
+          - path: /monitor
+            pathType: Prefix
+            backend:
+              service:
+                name: monitor-service-service
+                port:
+                  number: 8086
 
 ---
 apiVersion: networking.k8s.io/v1
