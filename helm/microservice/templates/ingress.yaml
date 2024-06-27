@@ -24,6 +24,13 @@ spec:
                 name: zipkin-service-service
                 port:
                   number: 9411
+          - path: /user        
+            pathType: Prefix
+            backend:
+              service:
+                name: user-service-service
+                port:
+                  number: 8087
     - host: micro-monitor.devops2.vn
       http:
         paths:
@@ -44,16 +51,7 @@ spec:
                 name: discovery-service-service
                 port:
                   number: 8761
-    - host: micro-user.devops2.vn
-      http:
-        paths:
-          - path: /        
-            pathType: Prefix
-            backend:
-              service:
-                name: user-service-service
-                port:
-                  number: 8087
+ 
     - host: micro-notification.devops2.vn
       http:
         paths:
