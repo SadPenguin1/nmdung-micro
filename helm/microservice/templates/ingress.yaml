@@ -24,20 +24,26 @@ spec:
                 name: zipkin-service-service
                 port:
                   number: 9411
-          - path: /discovery
-            pathType: Prefix
-            backend:
-              service:
-                name: discovery-service-service
-                port:
-                  number: 8761
-          - path: /monitor
+    - host: micro-monitor.devops2.vn
+      http:
+        paths:
+          - path: /
             pathType: Prefix
             backend:
               service:
                 name: monitor-service-service
                 port:
                   number: 8086
+    - host: micro-discovery.devops2.vn
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: discovery-service-service
+                port:
+                  number: 8761
     - host: micro-user.devops2.vn
       http:
         paths:
