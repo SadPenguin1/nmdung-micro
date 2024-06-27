@@ -1,8 +1,8 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: sc-ci-cd
-  namespace: ci-cd-helm  
+  name: micro
+  namespace: micro
 provisioner: rancher.io/local-path
 reclaimPolicy: Retain
 allowVolumeExpansion: true
@@ -14,7 +14,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mysql
-  namespace: nmdung-helm
+  namespace: micro
 spec:
   selector:
     app: mysql
@@ -34,7 +34,7 @@ spec:
     matchLabels:
       app: mysql
   serviceName: mysql
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:

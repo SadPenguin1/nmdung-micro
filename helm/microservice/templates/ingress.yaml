@@ -2,12 +2,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-config-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-helm.devops.vn
+    - host: micro.devops2.vn
       http:
         paths:
           - path: /config
@@ -29,13 +29,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-monitor1-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-helm.devops.vn
+    - host: micro.devops.vn
       http:
         paths:
           - path: /monitor
@@ -51,13 +51,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-monitor-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-monitor.devops.vn
+    - host: nmdung-monitor.devops2.vn
       http:
         paths:
           - path: /
@@ -72,13 +72,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-discovery-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-discovery.devops.vn
+    - host: nmdung-discovery.devops2.vn
       http:
         paths:
           - path: /
@@ -93,12 +93,12 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-user-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-user.devops.vn
+    - host: nmdung-user.devops2.vn
       http:
         paths:
           - path: /        
@@ -113,13 +113,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-notification-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-notification.devops.vn
+    - host: nmdung-notification.devops2.vn
       http:
         paths:
           - path: /        
@@ -135,13 +135,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-auth-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-auth.devops.vn
+    - host: nmdung-auth.devops2.vn
       http:
         paths:
           - path: /        
@@ -156,13 +156,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-statistic-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-statistic.devops.vn
+    - host: nmdung-statistic.devops2.vn
       http:
         paths:
           - path: /        
@@ -177,13 +177,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: ingress-gateway-helm
-  namespace: nmdung-helm
+  namespace: micro
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
   rules:
-    - host: nmdung-gateway.devops.vn
+    - host: nmdung-gateway.devops2.vn
       http:
         paths:
           - path: /        
