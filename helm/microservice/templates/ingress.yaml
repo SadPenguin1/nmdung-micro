@@ -85,15 +85,15 @@ spec:
                 port:
                   number: 8082
     - host: micro-statistic.devops2.vn
-    http:
-      paths:
-        - path: /        
-          pathType: Prefix
-          backend:
-            service:
-              name: statistic-service-service
-              port:
-                number: 8088
+      http:
+        paths:
+          - path: /        
+            pathType: Prefix
+            backend:
+              service:
+                name: statistic-service-service
+                port:
+                  number: 8088
 ---
 
 
