@@ -24,40 +24,7 @@ spec:
                 name: zipkin-service-service
                 port:
                   number: 9411
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-monitor1-helm
-  namespace: micro
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: micro.devops.vn
-      http:
-        paths:
-          - path: /monitor
-            pathType: Prefix
-            backend:
-              service:
-                name: monitor-service-service
-                port:
-                  number: 8086
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-monitor-helm
-  namespace: micro
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: nmdung-monitor.devops2.vn
+    - host: micro-monitor.devops2.vn
       http:
         paths:
           - path: /
@@ -67,18 +34,7 @@ spec:
                 name: monitor-service-service
                 port:
                   number: 8086
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-discovery-helm
-  namespace: micro
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: nmdung-discovery.devops2.vn
+    - host: micro-discovery.devops2.vn
       http:
         paths:
           - path: /
@@ -88,17 +44,7 @@ spec:
                 name: discovery-service-service
                 port:
                   number: 8761
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-user-helm
-  namespace: micro
-  annotations:
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: nmdung-user.devops2.vn
+    - host: micro-user.devops2.vn
       http:
         paths:
           - path: /        
@@ -108,18 +54,7 @@ spec:
                 name: user-service-service
                 port:
                   number: 8087
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-notification-helm
-  namespace: micro
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: nmdung-notification.devops2.vn
+    - host: micro-notification.devops2.vn
       http:
         paths:
           - path: /        
@@ -129,19 +64,7 @@ spec:
                 name: notification-service-service
                 port:
                   number: 8084
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-auth-helm
-  namespace: micro
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: nmdung-auth.devops2.vn
+    - host: micro-auth.devops2.vn
       http:
         paths:
           - path: /        
@@ -151,49 +74,27 @@ spec:
                 name: auth-service-service
                 port:
                   number: 8082
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-statistic-helm
-  namespace: micro
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: nmdung-statistic.devops2.vn
+    - host: micro-auth.devops2.vn
       http:
         paths:
           - path: /        
             pathType: Prefix
             backend:
               service:
-                name: statistic-service-service
+                name: auth-service-service
                 port:
-                  number: 8088
+                  number: 8082
+    - host: micro-statistic.devops2.vn
+    http:
+      paths:
+        - path: /        
+          pathType: Prefix
+          backend:
+            service:
+              name: statistic-service-service
+              port:
+                number: 8088
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: ingress-gateway-helm
-  namespace: micro
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: nmdung-gateway.devops2.vn
-      http:
-        paths:
-          - path: /        
-            pathType: Prefix
-            backend:
-              service:
-                name: gateway-service-service
-                port:
-                  number: 8085
-
 
 
 
