@@ -3,8 +3,8 @@ kind: StorageClass
 metadata:
   name: micro-sc
   namespace: micro
-provisioner: rancher.io/local-path
-reclaimPolicy: Retain
+provisioner:  cinder.csi.openstack.org
+reclaimPolicy: Delete
 allowVolumeExpansion: true
 volumeBindingMode: WaitForFirstConsumer
 
