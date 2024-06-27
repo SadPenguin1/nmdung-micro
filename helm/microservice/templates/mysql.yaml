@@ -1,7 +1,7 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: micro
+  name: micro-sc
   namespace: micro
 provisioner: rancher.io/local-path
 reclaimPolicy: Retain
@@ -55,25 +55,17 @@ spec:
           volumeMounts:  
             - mountPath: /var/lib/mysql
               name: mysql-persistent-storage
-      volumes:
-        - name: mysql-persistent-storage
-          persistentVolumeClaim:
-            claimName: mysql-pvc
+  volumeClaimTemplates:
+    - metadata:
+        name: mysql-persistent-storage
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: "micro-sc"  
+        resources:
+          requests:
+            storage: 2Gi  
 
----
 
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mysql-pvc
-  labels:
-    app: wordpress
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 2Gi
 
 
 
