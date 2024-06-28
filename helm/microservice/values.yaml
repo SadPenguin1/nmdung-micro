@@ -117,7 +117,7 @@ statisticservice:
     namespace: nmdung-helm
 
 resources: 
-  request:
+  requests:
     memory: "64Mi"
     cpu: "125m"
   limits:
