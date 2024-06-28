@@ -18,7 +18,14 @@ spec:
       containers:
       - name: auth-service-container
         image: {{ .Values.authservice.image.repository }}:{{ .Values.authservice.image.tag }}  
-        imagePullPolicy: {{ .Values.authservice.image.pullPolicy }}  
+        imagePullPolicy: {{ .Values.authservice.image.pullPolicy }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory:  {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
         ports:
         - containerPort: {{ .Values.authservice.service.port }}  
         envFrom:

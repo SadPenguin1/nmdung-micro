@@ -8,7 +8,7 @@ configservice:
     type: ClusterIP
     port: 8888
     targetPort: 8888
-  namespace: nmdung-helm
+    namespace: nmdung-helm
 
 
 discoveryservice:
@@ -116,7 +116,13 @@ statisticservice:
     targetPort: 8088
     namespace: nmdung-helm
 
-
+resources: 
+  request:
+    memory: "64Mi"
+    cpu: "125m"
+  limits:
+    memory: "128Mi" 
+    cpu: "250m"
 
 
 

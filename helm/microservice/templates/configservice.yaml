@@ -21,7 +21,13 @@ spec:
         imagePullPolicy: {{ .Values.configservice.image.pullPolicy }}  
         ports:
         - containerPort: {{ .Values.configservice.service.port }}  
-
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory:  {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
 ---
 apiVersion: v1
 kind: Service
