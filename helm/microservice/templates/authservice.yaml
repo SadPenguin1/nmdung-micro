@@ -1,27 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-service-deploy  
+  name: {{.Release.Name }}
   namespace: {{ .Release.Namespace }}
   labels:
-    app: auth-service-deploy
+    app: {{.Release.Name }}
 spec:
   replicas: {{ .Values.authservice.replicaCount }}  
   selector:
     matchLabels:
-      app: auth-service-deploy
+      app: {{.Release.Name }}
   template:
     metadata:
       labels:
-        app: auth-service-deploy
+        app: {{.Release.Name }}
     spec:
       containers:
-      - name: auth-service-container
-        image: {{ .Values.authservice.image.repository }}:{{ .Values.authservice.image.tag }}  
-        imagePullPolicy: {{ .Values.authservice.image.pullPolicy }}
+      - name: "{{.Release.Name }}-container"
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}  
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
       
         ports:
-        - containerPort: {{ .Values.authservice.service.port }}  
+        - containerPort: {{ .Values.service.port }}  
         envFrom:
         - configMapRef:
             name: microservice-configmap 
@@ -36,15 +36,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-service-service
+  name: {{ .Release.Name }}
   namespace: {{ .Release.Namespace }}
 spec:
-  type: {{ .Values.authservice.service.type }}  
+  type: {{ .Valuesservice.type }}  
   selector:
-    app: auth-service-deploy
+    app: "{{ .Release.Name }}-deploy"
   ports:
     - protocol: TCP
-      port: {{ .Values.authservice.service.port }}  
-      targetPort: {{ .Values.authservice.service.targetPort }}  
-      nodePort: {{ .Values.authservice.service.nodePort }}  
+      port: {{ .Values.service.port }}  
+      targetPort: {{ .Values.service.targetPort }}  
+      nodePort: {{ .Values.service.nodePort }}  
 
