@@ -28,6 +28,9 @@ spec:
           limits:
             memory:  {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
+      imagePullSecrets:
+        - name: regcred
+      
 ---
 apiVersion: v1
 kind: Service
