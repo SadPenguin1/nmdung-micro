@@ -10,7 +10,7 @@ spec:
   - from:
     - podSelector:
         matchExpressions:
-        - {key: app, operator: In, values: [auth-service-deploy, user-service-deploy,statistic-service-deploy]}
+        - {key: app, operator: In, values: [auth-service-deploy, user-service-deploy]}
     ports:
     - protocol: TCP
       port: 3306   

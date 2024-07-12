@@ -2,7 +2,7 @@ configservice:
   replicaCount: 1
   image:
     repository: core.harbor.domain/micro/config-service
-    tag: 41f6e478
+    tag: 0.2.0
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
