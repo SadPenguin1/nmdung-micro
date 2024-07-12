@@ -1,7 +1,7 @@
 configservice:
   replicaCount: 1
   image:
-    repository: core.harbor.domain/micro/config-service
+    repository: nguyenmanhdung/config-service
     tag: 0.2.0
     pullPolicy: IfNotPresent
   service:
