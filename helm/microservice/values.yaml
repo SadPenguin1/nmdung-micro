@@ -1,7 +1,7 @@
 configservice:
   replicaCount: 1
   image:
-    repository: nguyenmanhdung01122000@/config-service
+    repository: nguyenmanhdung/config-service
     tag: 0.2.0
     pullPolicy: IfNotPresent
   service:
