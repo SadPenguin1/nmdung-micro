@@ -1,8 +1,8 @@
 configservice:
   replicaCount: 1
   image:
-    repository: core.harbor.domain/micro/config-service
-    tag: 589d194c
+    repository: nguyenmanhdung01122000@/config-service
+    tag: 0.2.0
     pullPolicy: IfNotPresent
   service:
     type: ClusterIP
@@ -12,7 +12,7 @@ configservice:
 
 
 discoveryservice:
-  replicaCount: 2
+  replicaCount: 1
   image:
     repository: nguyenmanhdung/discovery-service
     tag: 0.1.0
@@ -24,7 +24,7 @@ discoveryservice:
 
 
 monitorservice:
-  replicaCount: 3
+  replicaCount: 1
   image:
     repository: nguyenmanhdung/monitor-admin
     tag: 0.1.0
