@@ -124,6 +124,25 @@ resources:
     memory: "512Mi" 
     cpu: "500m"
 
+autoscaling:
+  enabled: true
+  min: 1
+  max: 6
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: {{ .Values.autoscaling.metrics | first "averageUtilization" }}
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: {{ index .Values.autoscaling.metrics 1 "averageUtilization" }}
+
+
 
 
 

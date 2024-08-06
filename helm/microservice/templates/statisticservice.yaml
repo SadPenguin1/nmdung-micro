@@ -54,3 +54,31 @@ spec:
       targetPort: {{ .Values.statisticservice.service.targetPort }}  
       nodePort: {{ .Values.statisticservice.service.nodePort }}  
 
+---
+
+apiVersion: autoscaling/v2beta2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: statistic-service-hpa
+  namespace: {{ .Release.Namespace }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: statistic-service-deploy
+  minReplicas: {{ .Values.autoscaling.min }}  
+  maxReplicas: {{ .Values.autoscaling.max }}  
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 50
+
