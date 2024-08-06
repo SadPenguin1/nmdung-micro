@@ -134,13 +134,13 @@ autoscaling:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: {{ .Values.autoscaling.metrics | first "averageUtilization" }}
+        averageUtilization: 60
   - type: Resource
     resource:
       name: memory
       target:
         type: Utilization
-        averageUtilization: {{ index .Values.autoscaling.metrics 1 "averageUtilization" }}
+        averageUtilization: 30
 
 
 
