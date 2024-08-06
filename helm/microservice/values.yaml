@@ -126,7 +126,7 @@ resources:
 
 autoscaling:
   enabled: true
-  min: 1
+  min: 2
   max: 6
   metrics:
   - type: Resource

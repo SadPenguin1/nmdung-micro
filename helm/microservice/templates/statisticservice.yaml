@@ -80,5 +80,4 @@ spec:
       name: memory
       target:
         type: Utilization
-        averageUtilization: 30
-
+        averageUtilization: 50
