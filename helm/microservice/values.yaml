@@ -12,7 +12,7 @@ configservice:
 
 
 discoveryservice:
-  replicaCount: 4
+  replicaCount: 1
   image:
     repository: nguyenmanhdung/discovery-service
     tag: 0.1.0
