@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: user-service-container
-        image: {{ .Values.userservice.image.repository }}:{{ .Values.userservice.image.tag }}  
+        image: {{ .Values.userservice.image.repository }}:{{.Values.userservice.image.tag }}  
         imagePullPolicy: {{ .Values.userservice.image.pullPolicy }}  
         ports:
         - containerPort: {{ .Values.userservice.service.port }}  
