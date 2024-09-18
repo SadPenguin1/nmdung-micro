@@ -71,7 +71,7 @@ mysql:
 
 
 authservice:
-  replicaCount: 5
+  replicaCount: 3
   image:
     repository: nguyenmanhdung/auth-service
     tag: 0.1.0
@@ -82,7 +82,7 @@ authservice:
     namespace: nmdung-helm
 
 userservice:
-  replicaCount: 1
+  replicaCount: 3
   image:
     repository: nguyenmanhdung/user-service
     tag: 0.4.5
@@ -94,7 +94,7 @@ userservice:
 
 
 notificationservice:
-  replicaCount: 1
+  replicaCount: 3
   image:
     repository: nguyenmanhdung/notification-service
     tag: 0.1.0
@@ -106,7 +106,7 @@ notificationservice:
 
 
 statisticservice:
-  replicaCount: 1
+  replicaCount: 3
   image:
     repository: nguyenmanhdung/statistic1-service
     tag: 0.1.0
