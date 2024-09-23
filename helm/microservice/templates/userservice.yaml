@@ -101,7 +101,6 @@ metadata:
 data:
   application.properties: |
     spring.application.name=user-service
-    spring.config.import=configserver:http://${CONFIG_SERVICE}
     spring.cloud.config.fail-fast=true
 
 
