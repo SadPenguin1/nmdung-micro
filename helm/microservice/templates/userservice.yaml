@@ -39,11 +39,14 @@ spec:
             cpu: {{ .Values.resources.limits.cpu }}
         volumeMounts:                       # Thêm phần này
         - name: user-service-volume
-          mountPath: application.properties
+          mountPath: /
       volumes:                             # Thêm phần này
       - name: user-service-volume
         configMap:
           name: user-service-cm
+          items:
+            - key: application.properties
+             
      
 ---
 apiVersion: v1
