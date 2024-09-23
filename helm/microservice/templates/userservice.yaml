@@ -37,6 +37,13 @@ spec:
           limits:
             memory: {{ .Values.resources.limits.memory }}
             cpu: {{ .Values.resources.limits.cpu }}
+        volumeMounts:                       # Thêm phần này
+        - name: user-service-volume
+          mountPath: application.properties
+      volumes:                             # Thêm phần này
+      - name: user-service-volume
+        configMap:
+          name: user-service-cm
      
 ---
 apiVersion: v1
@@ -81,5 +88,18 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+    
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service-cm
+  namespace: {{ .Release.Namespace }}
+data:
+  application.properties: |
+    spring.application.name=user-service
+    spring.config.import=configserver:http://${CONFIG_SERVICE}
+    spring.cloud.config.fail-fast=true
 
 
