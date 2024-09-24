@@ -82,7 +82,7 @@ authservice:
     namespace: nmdung-helm
 
 userservice:
-  replicaCount: 3
+  replicaCount: 7
   image:
     repository: nguyenmanhdung/user-service
     # tag: 0.4.5
